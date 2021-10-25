@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row">
+    <h1>Create Lawyer</h1>
+    <%= form_for @user, class: 'form' do |f| %>
+      <% if @user.errors.present? %>
+        <div>
+          <h2><%= pluralize(@user.errors.count, 'error') %> prohibited to save the record.</h2>
+          <ul>
+            <% @user.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <div class="mt-2 col-md-4">
+        <%= f.label :first_name, class: 'form-label' %>
+        <%= f.text_field :first_name, class: 'form-control', id: 'firstName' %>
+        <span id="fn-span" style="color: #B00100;display:none;">First name can not be empty.</span>
+      </div>
+      <div class="mt-2 col-md-4">
+      <%= f.label :last_name, class: 'form-label' %>
+      <%= f.text_field :last_name, class: 'form-control', id: 'lastName' %>
+        <span id="ln-span" style="color: #B00100;display:none;">Last name can not be empty.</span>
+      </div>
+      <div class="mt-2 col-md-4">
+      <%= f.label :email, class: 'form-label' %>
+      <%= f.text_field :email, class: 'form-control', id: 'email' %>
+        <span id="e-span" style="color: #B00100;display:none;">Email can not be empty.</span>
+      </div>
+      <%= f.fields_for :lawyer, @user.build_lawyer do |form| %>
+        <div class="mt-2 col-md-4">
+          <%= form.label :address, class: 'form-label' %>
+          <%= form.text_field :address, class: 'form-control' %>
+        </div>
+      <% end %>
+      <%= f.submit 'Create', class: 'btn btn-info mt-2', id: 'submitBtn' %>
+    <% end %>
+    </div>
+    </div>
+
